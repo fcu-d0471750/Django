@@ -27,7 +27,6 @@
 
 <form action="htmlcreate_test/" method="get">
     <div id="mim" style="max-width: 50em">Python:<br>
-        <label id="labelid" name="labelname">0</label>
     <textarea id="code-python" name="code">
 print('A')
 </textarea></div>
@@ -74,14 +73,17 @@ print('A')
 	var btn=document.createElement("TEXTAREA");
 	//預設內容
 	var btn_text = document.createTextNode("#Coding...");
+
 	//設定外部id
 	btn.setAttribute("id", "code-python" + "-" + (count+1));
 	//設定外部name
 	btn.setAttribute("name", "code"+ (count+1));
 	//放入預設內容
 	btn.appendChild(btn_text);
+
 	//新增到畫面上
 	document.getElementById("mim").appendChild(btn);
+
 	//建立Editor
 	newmyCodeMirror = CodeMirror.fromTextArea(document.getElementById("code-python" + "-" + (count+1)), {
 		mode: "python",
@@ -94,10 +96,6 @@ print('A')
 	codemirror_array.push(newmyCodeMirror);
 	//textarea總數量 + 1
 	count = count + 1
-    document.getElementById("labelid").innerText = count;
-
-
-
 };
 
 function myFunction2(){

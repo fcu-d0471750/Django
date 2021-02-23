@@ -39,6 +39,8 @@ def multiremanetxt(code):
 
 def muldel():
     filename = 'code'
-    os.remove('Script_02/musics/code_folder/code1.py')
-    os.remove('Script_02/musics/code_folder/code2.py')
-    os.remove('Script_02/musics/code_folder/code3.py')
+    file_DIR = 'Script_02/musics/code_folder/'
+    file_count = len([name for name in os.listdir(file_DIR) if os.path.isfile(os.path.join(file_DIR, name))])
+    if(file_count>=1):
+        for i in range(1,file_count+1):
+            os.remove('Script_02/musics/code_folder/'+filename + str(i)+'.py')
