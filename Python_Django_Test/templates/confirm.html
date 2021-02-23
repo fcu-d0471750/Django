@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- 載入靜態檔案 -->
+{% load static %}
+
+<head>
+    <h1>-----------</h1>
+    <!--必要套件-->
+    <link rel="stylesheet" href="{% static 'codemirror/lib/codemirror.css' %}">
+    <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+    <!--程式語言-->
+    <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+    <!--額外功能-->
+    <!--摺疊功能-->
+    <script src="{% static 'codemirror/addon/fold/foldcode.js' %}"></script>
+    <script src="{% static 'codemirror/addon/fold/indent-fold.js' %}"></script>
+    <!--摺疊外觀-->
+    <link rel="stylesheet" href="{% static 'codemirror/addon/fold/foldgutter.css' %}"/>
+    <!--摺疊左側標記-->
+    <script src="{% static 'codemirror/addon/fold/foldgutter.js' %}"></script>
+    <!--摺疊大括號{}功能-->
+    <script src="{% static 'codemirror/addon/fold/brace-fold.js' %}"></script>
+    <!--摺疊註解功能-->
+    <script src="{% static 'codemirror/addon/fold/comment-fold.js' %}"></script>
+</head>
+
+<body>
+<form action="confirm/" method="get">
+    <div style="max-width: 50em">Python:<br>
+        <textarea id="code-python" name="code">
+import unittest
+
+def add(a, b):
+    return a + b
+def subtract(a, b):
+    return a - b
+def multiply(a, b):
+    return a * b
+def divide(numerator, denominator):
+    return float(numerator) / denominator
+
+class TestAdd(unittest.TestCase):
+    """
+    Test the add function from the mymath library
+    """
+    def test_add_integers(self):
+        """
+        Test that the addition of two integers returns the correct total
+        """
+        result = add(1, 2)
+        self.assertEqual(result, 3)
+    def test_add_floats(self):
+        """
+        Test that the addition of two floats returns the correct result
+        """
+        result = add(10.5, 2)
+        self.assertEqual(result, 12.5)
+    def test_add_strings(self):
+        """
+        Test the addition of two strings returns the two string as one
+        concatenated string
+        """
+        result = add('abc', 'def')
+        self.assertEqual(result, 'abcdef')
+if __name__ == '__main__':
+    unittest.main()
+        </textarea>
+    </div>
+    <button name="subject" type="submit" value="Submit">confirm</button>
+</form>
+
+<script id="script">
+
+    var te_python = document.getElementById("code-python");
+    var myCodeMirror;
+
+    myCodeMirror = CodeMirror.fromTextArea(te_python, {
+        mode: "python",
+        lineNumbers: true,
+        extraKeys: {
+            "Ctrl-Q": function (cm) {
+                cm.foldCode(cm.getCursor());
+            }
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+
+</script>
+
+</body>
