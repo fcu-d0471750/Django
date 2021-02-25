@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-             url(r'^$',create_test1,name='htmlcreate_test'), # create_test.html網址
+             url(r'^$',create_test1), # create_test.html網址
              #url(r'^index', test1, name='confirm'),  # confirm.html網址
-             url(r'^htmlcreate_test/', index1, name='index1')  # hello_django.html網址
+             url(r'^hello_django/', index1)  # hello_django.html網址
         ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

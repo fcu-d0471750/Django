@@ -21,21 +21,91 @@
     <script src="{% static 'codemirror/addon/fold/brace-fold.js' %}"></script>
     <!--摺疊註解功能-->
     <script src="{% static 'codemirror/addon/fold/comment-fold.js' %}"></script>
+
+    <!--分割線-->
+    <!--視窗分割-->
+     <link rel="stylesheet" href="{% static 'General/General_CSS/General.css'%}"/>
 </head>
 
 <body>
 
-<form action="htmlcreate_test/" method="get">
-    <div id="mim" style="max-width: 50em">Python:<br>
+<form action="hello_django/" method="get">
+    <!--總元素-->
+    <div id="mim" class="Flex_Wrap">
+        <!---->
+        <div id="Area_of_Editor" class="Flex_Left">
     <textarea id="code-python" name="code">
-print('A')
-</textarea></div>
+import unittest
+import calculator
+
+class CalculatorTestCase(unittest.TestCase):
+    def setUp(self):
+        self.args = (3, 2)
+
+    def tearDown(self):
+        self.args = None
+
+    def test_plus(self):
+        expected = 5;
+        result = calculator.plus(*self.args);
+        self.assertEqual(expected, result);
+
+    def test_minus(self):
+        expected = 1;
+        result = calculator.minus(*self.args);
+        self.assertEqual(expected, result);
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+    </textarea>
+        </div>
+
+        <!---->
+        <div id="Area_of_CT" class="Flex_Right">
+            <div id="Area_of_CT_Child" class="Flex_Right_FirstChild">
+            <textarea id="CT_1">
+class calculator:
+    def plus(a, b):
+     return a * b
+
+   def minus(a, b):
+     return a / b
+    </textarea>
+                </div>
+            <div id="Area_of_CT_Child" class="Flex_Right_Child">
+            <textarea id="CT_2">
+class calculator:
+    def plus(a, b):
+     return a && b
+
+   def minus(a, b):
+     return a % b
+    </textarea>
+                </div>
+            <div id="Area_of_CT_Child" class="Flex_Right_Child">
+            <textarea id="CT_3">
+class calculator:
+    def plus(a, b):
+     return a + b
+
+   def minus(a, b):
+     return a - b
+    </textarea>
+                </div>
+        </div>
+
+
+    </div>
 
 
   <button name="subject" type="submit" value="Submit">OK!!!</button>
   <input type="button" value="Add" onclick= 'myFunction()' >
-  <input type="button" value="Run" onclick= 'myFunction2()' >
+  <!--input type="button" value="Run" onclick= 'myFunction2()' -->
 </form>
+
+
 <script id="script">
 /*
  * Demonstration of code folding
@@ -56,12 +126,34 @@ print('A')
   myCodeMirror = CodeMirror.fromTextArea(te_python, {
 		mode: "python",
 		lineNumbers: true,
-		extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
 		foldGutter: true,
 		gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   });
+    //大小(W,H)
+    myCodeMirror.setSize(800,500)
     //放入codemirror_array
 	codemirror_array.push(myCodeMirror);
+
+
+	//Area_of_CT
+    var CT_count = 3
+    for (let i=1; i <= CT_count; i++) {
+        let CT_id = "CT_" + String(i) ;
+        let temp_CT = document.getElementById(String(CT_id));
+        let temp_codemirror
+
+        temp_codemirror = CodeMirror.fromTextArea(temp_CT, {
+            mode: "python",
+            lineNumbers: true,
+            foldGutter: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            //唯獨模式
+            readOnly:true
+        });
+        //大小(W,H)
+        temp_codemirror.setSize(200,200)
+    }
+
 
 	//==================================
 	//副程式 : 新增textarea
@@ -92,12 +184,16 @@ print('A')
 		foldGutter: true,
 		gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   });
+	//大小(W,H)
+    newmyCodeMirror.setSize(800,200)
 	//放入codemirror_array
 	codemirror_array.push(newmyCodeMirror);
 	//textarea總數量 + 1
 	count = count + 1
 };
 
+
+/*
 function myFunction2(){
 		for (var i=0; i<codemirror_array.length; i=i+1){
 			console.log(codemirror_array.length);
@@ -106,7 +202,7 @@ function myFunction2(){
 
 
 };
-
+*/
   </script>
 
 </body>

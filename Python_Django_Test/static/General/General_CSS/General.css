@@ -1,0 +1,36 @@
+.Flex_Wrap{ /*父元素*/
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Flex_Left{
+    background: white;
+    width: 50%;
+    height: 50%;
+    border:1px #7D7D7D solid;
+}
+
+.Flex_Right{
+    background: white;
+    width: 50%;
+    height: 200px;
+}
+
+.Flex_Right_FirstChild{
+    background: white;
+    width: 80%;
+    height: 200px;
+    border:1px #7D7D7D solid;
+    margin-left: 1%;
+}
+
+.Flex_Right_Child{
+    background: white;
+    width: 80%;
+    height: 200px;
+    border:1px #7D7D7D solid;
+    margin-top: 1%;
+    margin-left: 1%;
+}
