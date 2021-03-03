@@ -1,19 +1,8 @@
 from django.shortcuts import render
 from Script_02.musics import python_unittest_load
-
-
-
-def test1(request):
-  return render(request, 'confirm.html')
+import os,shutil
 
 def index1(request):
-    #code_all = request.GET.get('code')  # 獲取程式碼
-    #ans = {}
-    #ans['head'] = 'hello,' + code_all  #
-
-    #python_unittest_load.remanetxt(code_all) # 編譯成.py
-    #python_unittest_load.webtest() # 執行測試
-
     # 取得textarea數量
     # textarea數量，最少為1
     textarea_count = 1
@@ -62,5 +51,80 @@ def index1(request):
 
 
 def create_test1(request):
-    python_unittest_load.muldel()
+    #python_unittest_load.muldel()
+    os.remove('Script_02/musics/test_case_folder/user_case.py')
+    os.remove('Script_02/musics/code_folder/mutant1.py')
+    os.remove('Script_02/musics/code_folder/mutant2.py')
+    os.remove('Script_02/musics/code_folder/mutant3.py')
     return render(request, 'htmlcreate_test.html')
+
+def Do_Defender(request):
+    # 取得使用者的Test Case-------------------------------------------------------------------------------------------------------------------
+    user_test_case = request.GET.get('code')
+    file = 'Script_02/musics/test_case_folder/user_case.txt'
+    f = open(file, 'w+')
+    f.write(str(user_test_case))
+    f.seek(0)
+    f.close()
+    os.rename('Script_02/musics/test_case_folder/user_case.txt', 'Script_02/musics/test_case_folder/user_case.py')
+
+    # 複製Test Case到code_collexct_folder-------------------------------------------------------------------------------------------------------------------
+    shutil.copy('Script_02/musics/test_case_folder/user_case.py', 'Script_02/musics/code_collect_folder')
+
+    # 取得Mutant-------------------------------------------------------------------------------------------------------------------
+    # textarea數量，最少為1
+    textarea_count = 0
+    for i in range(1, 10):
+        name = 'mutant' + str(i)
+        if request.GET.get(name) is not None:
+            print(name)
+            textarea_count = textarea_count + 1
+        else:
+            print('break: ', i)
+            break
+
+    # 獲取程式碼
+    each_code = []
+    for i in range(1, textarea_count+1):
+        name = 'mutant' + str(i)
+        temp = request.GET.get(name)
+        each_code.append(temp)
+        temp = []
+
+    # 編譯成.py
+    filename = 'mutant'
+    for i in range(0,textarea_count):
+        file = 'Script_02/musics/code_folder/' + filename + str(i+1) + '.txt'
+        f = open(file, 'w+')
+        f.write(str(each_code[i]))
+        f.seek(0)
+        f.close()
+        os.rename(file, 'Script_02/musics/code_folder/' + filename + str(i+1) + '.py')
+
+    #新增資料夾-------------------------------------------------------------------------------------------------------------------
+    for i in range(1,textarea_count+1):
+        # 資料夾是否存在
+        isexists = os.path.exists('Script_02/musics/code_collect_folder/' + filename + str(i))
+        # 如果不存在
+        if(isexists == False):os.makedirs('Script_02/musics/code_collect_folder/' + filename + str(i))
+
+    #新增組別:Test Case、Mutant-------------------------------------------------------------------------------------------------------------------
+    for i in range(1, textarea_count + 1):
+        # 放入資料夾(Test Case)
+        #shutil.copy('Script_02/musics/test_case_folder/user_case.py','Script_02/musics/code_collect_folder/' + filename + str(i))
+        Test_file = open('Script_02/musics/test_case_folder/user_case.py','r')
+        new_Test_file = open('Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+'.txt', 'w+')
+        new_Test_file.write("from mutant"+str(i)+" import calculator"+"\n" + Test_file.read())
+        #calculator
+        new_Test_file.seek(0)
+        new_Test_file.close()
+        os.rename('Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+'.txt', 'Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+ '.py')
+        #放入資料夾(Mutant)
+        shutil.copy('Script_02/musics/code_folder/' + filename + str(i) + '.py', 'Script_02/musics/code_collect_folder/' + filename + str(i))
+
+    #執行單元測試-------------------------------------------------------------------------------------------------------------------
+    for i in range(1, textarea_count + 1):
+        print('UnitTest',i,'-------------------------------')
+        file = 'Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+ '.py'
+        os.system('python ' + file)
+    return render(request, 'hello_django.html')

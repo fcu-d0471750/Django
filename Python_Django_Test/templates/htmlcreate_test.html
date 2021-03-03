@@ -3,7 +3,6 @@
 {% load static %}
 
 <head>
-    <h1>-----------</h1>
     <!--必要套件-->
     <link rel="stylesheet" href="{% static 'codemirror/lib/codemirror.css' %}">
     <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
@@ -24,19 +23,23 @@
 
     <!--分割線-->
     <!--視窗分割-->
-     <link rel="stylesheet" href="{% static 'General/General_CSS/General.css'%}"/>
+    <link rel="stylesheet" href="{% static 'General/General_CSS/General.css' %}"/>
 </head>
 
 <body>
 
+
 <form action="hello_django/" method="get">
+    <div id="Area_of_FunctionBar" class="FunctionBar">
+        <button name="subject" type="submit" value="Submit">OK!!!</button>
+        <input type="button" value="Add" onclick='myFunction()'>
+    </div>
     <!--總元素-->
     <div id="mim" class="Flex_Wrap">
         <!---->
         <div id="Area_of_Editor" class="Flex_Left">
     <textarea id="code-python" name="code">
 import unittest
-import calculator
 
 class CalculatorTestCase(unittest.TestCase):
     def setUp(self):
@@ -56,7 +59,7 @@ class CalculatorTestCase(unittest.TestCase):
         self.assertEqual(expected, result);
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
 
 
     </textarea>
@@ -65,80 +68,75 @@ if __name__ == '__main__':
         <!---->
         <div id="Area_of_CT" class="Flex_Right">
             <div id="Area_of_CT_Child" class="Flex_Right_FirstChild">
-            <textarea id="CT_1">
+            <textarea id="CT_1" name="mutant1">
 class calculator:
-    def plus(a, b):
+   def plus(a, b):
      return a * b
 
    def minus(a, b):
      return a / b
     </textarea>
-                </div>
+            </div>
             <div id="Area_of_CT_Child" class="Flex_Right_Child">
-            <textarea id="CT_2">
+            <textarea id="CT_2" name="mutant2">
 class calculator:
-    def plus(a, b):
-     return a && b
+   def plus(a, b):
+     return a & b
 
    def minus(a, b):
      return a % b
     </textarea>
-                </div>
+            </div>
             <div id="Area_of_CT_Child" class="Flex_Right_Child">
-            <textarea id="CT_3">
+            <textarea id="CT_3" name="mutant3">
 class calculator:
-    def plus(a, b):
+   def plus(a, b):
      return a + b
 
    def minus(a, b):
      return a - b
     </textarea>
-                </div>
+            </div>
         </div>
 
 
     </div>
-
-
-  <button name="subject" type="submit" value="Submit">OK!!!</button>
-  <input type="button" value="Add" onclick= 'myFunction()' >
-  <!--input type="button" value="Run" onclick= 'myFunction2()' -->
 </form>
 
 
 <script id="script">
-/*
- * Demonstration of code folding
- */
+    /*
+     * Demonstration of code folding
+     */
 
-  //第一個textarea
-  var te_python = document.getElementById("code-python");
-  //第一個Editor
-  var myCodeMirror;
-  //codemirror陣列
-  var codemirror_array = []
-  //新增的textarea總數量(第一個Editor不算)
-  var count = 0;
-  //抓取所有textarea
-  var textareass = document.getElementsByTagName("textarea");
+    //第一個textarea
+    var te_python = document.getElementById("code-python");
+    //第一個Editor
+    var myCodeMirror;
+    //codemirror陣列
+    var codemirror_array = []
+    //新增的textarea總數量(第一個Editor不算)
+    var count = 0;
+    //抓取所有textarea
+    var textareass = document.getElementsByTagName("textarea");
 
-  //第一個Editor
-  myCodeMirror = CodeMirror.fromTextArea(te_python, {
-		mode: "python",
-		lineNumbers: true,
-		foldGutter: true,
-		gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-  });
+    //第一個Editor
+    myCodeMirror = CodeMirror.fromTextArea(te_python, {
+        mode: "python",
+        lineNumbers: true,
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
     //大小(W,H)
-    myCodeMirror.setSize(800,500)
+    myCodeMirror.setSize(940, 500)
     //放入codemirror_array
-	codemirror_array.push(myCodeMirror);
+    codemirror_array.push(myCodeMirror);
 
 
-	//Area_of_CT
+    //Area_of_CT
     var CT_count = 3
-    for (let i=1; i <= CT_count; i++) {
-        let CT_id = "CT_" + String(i) ;
+    for (let i = 1; i <= CT_count; i++) {
+        let CT_id = "CT_" + String(i);
         let temp_CT = document.getElementById(String(CT_id));
         let temp_codemirror
 
@@ -148,61 +146,49 @@ class calculator:
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             //唯獨模式
-            readOnly:true
+            readOnly: true
         });
         //大小(W,H)
-        temp_codemirror.setSize(200,200)
+        temp_codemirror.setSize(200, 200)
     }
 
 
-	//==================================
-	//副程式 : 新增textarea
-	//==================================
-	function myFunction(){
-	//暫存新的Editor
-	var newmyCodeMirror;
-	//新增TEXTAREA
-	var btn=document.createElement("TEXTAREA");
-	//預設內容
-	var btn_text = document.createTextNode("#Coding...");
+    //==================================
+    //副程式 : 新增textarea
+    //==================================
+    function myFunction() {
+        //暫存新的Editor
+        let newmyCodeMirror;
+        //新增TEXTAREA
+        let btn = document.createElement("TEXTAREA");
+        //預設內容
+        let btn_text = document.createTextNode("#Coding...");
 
-	//設定外部id
-	btn.setAttribute("id", "code-python" + "-" + (count+1));
-	//設定外部name
-	btn.setAttribute("name", "code"+ (count+1));
-	//放入預設內容
-	btn.appendChild(btn_text);
+        //設定外部id
+        btn.setAttribute("id", "code-python" + "-" + (count + 1));
+        //設定外部name
+        btn.setAttribute("name", "code" + (count + 1));
+        //放入預設內容
+        btn.appendChild(btn_text);
 
-	//新增到畫面上
-	document.getElementById("mim").appendChild(btn);
+        //新增到畫面上
+        document.getElementById("Area_of_Editor").appendChild(btn);
 
-	//建立Editor
-	newmyCodeMirror = CodeMirror.fromTextArea(document.getElementById("code-python" + "-" + (count+1)), {
-		mode: "python",
-		lineNumbers: true,
-		extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
-		foldGutter: true,
-		gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-  });
-	//大小(W,H)
-    newmyCodeMirror.setSize(800,200)
-	//放入codemirror_array
-	codemirror_array.push(newmyCodeMirror);
-	//textarea總數量 + 1
-	count = count + 1
-};
+        //建立Editor
+        newmyCodeMirror = CodeMirror.fromTextArea(document.getElementById("code-python" + "-" + (count + 1)), {
+            mode: "python",
+            lineNumbers: true,
+            foldGutter: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        });
+        //大小(W,H)
+        newmyCodeMirror.setSize(940, 200)
+        //放入codemirror_array
+        codemirror_array.push(newmyCodeMirror);
+        //textarea總數量 + 1
+        count = count + 1
+    };
 
-
-/*
-function myFunction2(){
-		for (var i=0; i<codemirror_array.length; i=i+1){
-			console.log(codemirror_array.length);
-			console.log(codemirror_array[i].getValue());
-		}
-
-
-};
-*/
-  </script>
+</script>
 
 </body>

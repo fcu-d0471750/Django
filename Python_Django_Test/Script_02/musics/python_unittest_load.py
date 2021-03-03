@@ -2,9 +2,6 @@ import os,sys
 import coverage
 import webbrowser
 
-
-#filename = input()
-
 def webtest():
     # 執行---------------------------------------------------
     os.system("coverage run python_unittest_test.py" )
