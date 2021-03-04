@@ -51,11 +51,26 @@ def index1(request):
 
 
 def create_test1(request):
-    #python_unittest_load.muldel()
-    os.remove('Script_02/musics/test_case_folder/user_case.py')
-    os.remove('Script_02/musics/code_folder/mutant1.py')
-    os.remove('Script_02/musics/code_folder/mutant2.py')
-    os.remove('Script_02/musics/code_folder/mutant3.py')
+    if(os.path.isfile('Script_02/musics/test_case_folder/user_case.py') == True):
+       os.remove('Script_02/musics/test_case_folder/user_case.py')
+
+    if (os.path.isfile('Script_02/musics/code_folder/mutant1.py') == True):
+        os.remove('Script_02/musics/code_folder/mutant1.py')
+
+    if (os.path.isfile('Script_02/musics/code_folder/mutant2.py') == True):
+        os.remove('Script_02/musics/code_folder/mutant2.py')
+
+    if (os.path.isfile('Script_02/musics/code_folder/mutant3.py') == True):
+        os.remove('Script_02/musics/code_folder/mutant3.py')
+
+    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant1/user_case1.py') == True):
+        os.remove('Script_02/musics/code_collect_folder/mutant1/user_case1.py')
+
+    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant2/user_case2.py') == True):
+        os.remove('Script_02/musics/code_collect_folder/mutant2/user_case2.py')
+
+    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant3/user_case3.py') == True):
+        os.remove('Script_02/musics/code_collect_folder/mutant3/user_case3.py')
     return render(request, 'htmlcreate_test.html')
 
 def Do_Defender(request):

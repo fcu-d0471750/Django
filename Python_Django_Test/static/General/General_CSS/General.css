@@ -1,27 +1,24 @@
 .Flex_Wrap{ /*父元素*/
     width: 100%;
-    height: 1000px;
+    height: 800px;
     margin-top: 5px;
+    display:flex;
 }
 
 .Flex_Left{
     background: white;
-    width: 50%;
-    height: 50%;
-    border:1px #7D7D7D solid;
+    flex: 1;
 }
 
 .Flex_Right{
     background: white;
-    width: 50%;
-    height: 200px;
+    flex: 1;
 }
 
 .Flex_Right_FirstChild{
     background: white;
     width: 80%;
     height: 200px;
-    border:1px #7D7D7D solid;
     margin-left: 1%;
 }
 
@@ -29,12 +26,14 @@
     background: white;
     width: 80%;
     height: 200px;
-    border:1px #7D7D7D solid;
     margin-top: 1%;
     margin-left: 1%;
 }
 
-.FunctionBar{
-    background: red;
-    margin-bottom: 5px;
+.FunctionBar1003{
+    background: #aa00bb;
+    margin-bottom: 10px;
 }
+
+
+

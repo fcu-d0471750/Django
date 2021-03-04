@@ -30,8 +30,8 @@
 
 
 <form action="hello_django/" method="get">
-    <div id="Area_of_FunctionBar" class="FunctionBar">
-        <button name="subject" type="submit" value="Submit">OK!!!</button>
+    <div id="Area_of_FunctionBar" class="FunctionBar1003">
+        <input name="subject" type="submit" value="Submit">
         <input type="button" value="Add" onclick='myFunction()'>
     </div>
     <!--總元素-->
@@ -99,7 +99,6 @@ class calculator:
             </div>
         </div>
 
-
     </div>
 </form>
 
@@ -128,7 +127,7 @@ class calculator:
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
     //大小(W,H)
-    myCodeMirror.setSize(940, 500)
+    myCodeMirror.setSize(900, 800)
     //放入codemirror_array
     codemirror_array.push(myCodeMirror);
 
@@ -149,7 +148,7 @@ class calculator:
             readOnly: true
         });
         //大小(W,H)
-        temp_codemirror.setSize(200, 200)
+        temp_codemirror.setSize(400, 200)
     }
 
 
@@ -182,7 +181,7 @@ class calculator:
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
         //大小(W,H)
-        newmyCodeMirror.setSize(940, 200)
+        //newmyCodeMirror.setSize(500, 300)
         //放入codemirror_array
         codemirror_array.push(newmyCodeMirror);
         //textarea總數量 + 1
