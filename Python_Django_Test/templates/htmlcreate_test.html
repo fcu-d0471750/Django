@@ -24,15 +24,17 @@
     <!--分割線-->
     <!--視窗分割-->
     <link rel="stylesheet" href="{% static 'General/General_CSS/General.css' %}"/>
+
+    <script src="{% static 'General/General_JS/General.js' %}"></script>
 </head>
 
 <body>
 
 
 <form action="hello_django/" method="get">
-    <div id="Area_of_FunctionBar" class="FunctionBar1003">
+    <div id="Area_of_FunctionBar" class="FunctionBar">
         <input name="subject" type="submit" value="Submit">
-        <input type="button" value="Add" onclick='myFunction()'>
+        <input type="button" value="Add" onclick='Add_Editor(codemirror_array,count)'>
     </div>
     <!--總元素-->
     <div id="mim" class="Flex_Wrap">
@@ -67,8 +69,7 @@ if __name__ == '__main__':
 
         <!---->
         <div id="Area_of_CT" class="Flex_Right">
-            <div id="Area_of_CT_Child" class="Flex_Right_FirstChild">
-            <textarea id="CT_1" name="mutant1">
+            <textarea  id="CT_1" name="mutant1">
 class calculator:
    def plus(a, b):
      return a * b
@@ -76,9 +77,9 @@ class calculator:
    def minus(a, b):
      return a / b
     </textarea>
-            </div>
-            <div id="Area_of_CT_Child" class="Flex_Right_Child">
-            <textarea id="CT_2" name="mutant2">
+
+
+                <textarea  id="CT_2" name="mutant2">
 class calculator:
    def plus(a, b):
      return a & b
@@ -86,9 +87,8 @@ class calculator:
    def minus(a, b):
      return a % b
     </textarea>
-            </div>
-            <div id="Area_of_CT_Child" class="Flex_Right_Child">
-            <textarea id="CT_3" name="mutant3">
+
+                <textarea  id="CT_3" name="mutant3">
 class calculator:
    def plus(a, b):
      return a + b
@@ -96,22 +96,25 @@ class calculator:
    def minus(a, b):
      return a - b
     </textarea>
-            </div>
-        </div>
 
+<textarea  id="CT_4" name="mutant4">
+class calculator:
+   def plus(a, b):
+     return a + b
+
+   def minus(a, b):
+     return a - b
+    </textarea>
+
+
+        </div>
     </div>
 </form>
 
 
 <script id="script">
-    /*
-     * Demonstration of code folding
-     */
-
     //第一個textarea
     var te_python = document.getElementById("code-python");
-    //第一個Editor
-    var myCodeMirror;
     //codemirror陣列
     var codemirror_array = []
     //新增的textarea總數量(第一個Editor不算)
@@ -120,6 +123,8 @@ class calculator:
     var textareass = document.getElementsByTagName("textarea");
 
     //第一個Editor
+    Initial_Editor(te_python, codemirror_array);
+    /*
     myCodeMirror = CodeMirror.fromTextArea(te_python, {
         mode: "python",
         lineNumbers: true,
@@ -130,11 +135,12 @@ class calculator:
     myCodeMirror.setSize(900, 800)
     //放入codemirror_array
     codemirror_array.push(myCodeMirror);
-
+    */
 
     //Area_of_CT
-    var CT_count = 3
-
+    var CT_count = calculation();
+    Initial_CT(CT_count);
+    /*
     for (let i = 1; i <= CT_count; i++) {
         let CT_id = "CT_" + String(i);
         let temp_CT = document.getElementById(String(CT_id));
@@ -150,8 +156,9 @@ class calculator:
         });
         //大小(W,H)
         temp_codemirror.setSize(400, 200)
-    }
+    }*/
 
+    /*
     //==================================
     //副程式 : 計算CT數量
     //==================================
@@ -163,7 +170,9 @@ class calculator:
         }
         return check_count
     }
+    */
 
+    /*
     //==================================
     //副程式 : 新增textarea(CT)
     //==================================
@@ -198,12 +207,12 @@ class calculator:
         //大小(W,H)
         newmyCodeMirror.setSize(400, 200);
     }
-
+    */
 
     //==================================
     //副程式 : 新增textarea(Editor)
     //==================================
-    function myFunction() {
+    /*function myFunction() {
         //暫存新的Editor
         let newmyCodeMirror;
         //新增TEXTAREA
@@ -234,7 +243,7 @@ class calculator:
         codemirror_array.push(newmyCodeMirror);
         //textarea總數量 + 1
         count = count + 1
-    };
+    }*/
 
 </script>
 

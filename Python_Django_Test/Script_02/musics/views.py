@@ -54,23 +54,17 @@ def create_test1(request):
     if(os.path.isfile('Script_02/musics/test_case_folder/user_case.py') == True):
        os.remove('Script_02/musics/test_case_folder/user_case.py')
 
-    if (os.path.isfile('Script_02/musics/code_folder/mutant1.py') == True):
-        os.remove('Script_02/musics/code_folder/mutant1.py')
+    for i in range(1, 10):
+        filename = 'Script_02/musics/code_folder/mutant' + str(i) + '.py'
+        if (os.path.isfile(filename) == True):
+            os.remove(filename)
 
-    if (os.path.isfile('Script_02/musics/code_folder/mutant2.py') == True):
-        os.remove('Script_02/musics/code_folder/mutant2.py')
+    for i in range(1,10):
+        #filename = 'Script_02/musics/code_collect_folder/mutant' + str(i) + '/user_case' + str(i) + '.py'
+        filename = 'Script_02/musics/code_collect_folder/mutant' + str(i)
+        if (os.path.isdir(filename) == True):
+            shutil.rmtree(filename)
 
-    if (os.path.isfile('Script_02/musics/code_folder/mutant3.py') == True):
-        os.remove('Script_02/musics/code_folder/mutant3.py')
-
-    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant1/user_case1.py') == True):
-        os.remove('Script_02/musics/code_collect_folder/mutant1/user_case1.py')
-
-    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant2/user_case2.py') == True):
-        os.remove('Script_02/musics/code_collect_folder/mutant2/user_case2.py')
-
-    if (os.path.isfile('Script_02/musics/code_collect_folder/mutant3/user_case3.py') == True):
-        os.remove('Script_02/musics/code_collect_folder/mutant3/user_case3.py')
     return render(request, 'htmlcreate_test.html')
 
 def Do_Defender(request):
@@ -130,7 +124,6 @@ def Do_Defender(request):
         Test_file = open('Script_02/musics/test_case_folder/user_case.py','r')
         new_Test_file = open('Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+'.txt', 'w+')
         new_Test_file.write("from mutant"+str(i)+" import calculator"+"\n" + Test_file.read())
-        #calculator
         new_Test_file.seek(0)
         new_Test_file.close()
         os.rename('Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+'.txt', 'Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+ '.py')
@@ -139,7 +132,9 @@ def Do_Defender(request):
 
     #執行單元測試-------------------------------------------------------------------------------------------------------------------
     for i in range(1, textarea_count + 1):
+        print('-------------------------------')
         print('UnitTest',i,'-------------------------------')
+        print('-------------------------------')
         file = 'Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+ '.py'
         os.system('python ' + file)
     return render(request, 'hello_django.html')
