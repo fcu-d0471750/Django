@@ -1,54 +1,10 @@
 from django.shortcuts import render
 import os,shutil
 
-def index1(request):
-    # 取得textarea數量
-    # textarea數量，最少為1
-    textarea_count = 1
-    for i in range(1,10):
-        name = 'code'+str(i)
-        if request.GET.get(name) is not None:
-            print(name)
-            textarea_count = textarea_count + 1
-        else :
-            print('break: ' , i)
-            break
 
-    # 獲取程式碼
-    ans = {}
-    first_code = request.GET.get('code')
-    each_code = []
-    each_code.append(first_code)
-    ans['head'] = first_code
-    for i in range(1,textarea_count):
-        name = 'code' + str(i)
-        temp = request.GET.get(name)
-        each_code.append(temp)
-        temp = []
 
-    for i in range(0, textarea_count):
-        ans['head'] = ans['head'] + each_code[i]
 
-    python_unittest_load.multiremanetxt(each_code)  # 編譯成.py
-    '''
-    # 獲取程式碼
-    first_code = request.GET.get('code')
-    each_code = []
-    each_code.append(first_code)
-    count11 = request.GET.get('code1')
-    each_code.append(count11)
-    count11 = request.GET.get('code2')
-    each_code.append(count11)
-
-    # 設定回傳值
-    ans = {}
-    ans['head'] = first_code + "code1: " + each_code[0] + "code2: " + each_code[1];
-
-    python_unittest_load.multiremanetxt(each_code)# 編譯成.py
-    '''
-    return render(request, 'hello_django.html', ans)
-
-def create_test1(request):
+def attackhome(request):
     if(os.path.isfile('Script_02/musics/test_case_folder/user_case.py') == True):
        os.remove('Script_02/musics/test_case_folder/user_case.py')
 
@@ -63,9 +19,9 @@ def create_test1(request):
         if (os.path.isdir(filename) == True):
             shutil.rmtree(filename)
 
-    return render(request, 'htmlcreate_test.html')
+    return render(request, 'attackpage.html')
 
-def Do_Defender(request):
+def Do_Attack(request):
     # 取得使用者的Test Case-------------------------------------------------------------------------------------------------------------------
     user_test_case = request.GET.get('code')
     file = 'Script_02/musics/test_case_folder/user_case.txt'

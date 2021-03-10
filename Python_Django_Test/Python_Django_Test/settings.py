@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Script_02.musics',
+    'Script_02.aggression',
 ]
 
 MIDDLEWARE = [

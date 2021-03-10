@@ -23,5 +23,16 @@
     margin-bottom: 10px;
 }
 
+.Flex_Left_Attack{
+    background: white;
+    display:flex;
+    flex-direction: column;
+    margin-right: 10px;
+    justify-content: space-between ;
+}
 
 
+.Flex_Right_Attack{
+   background: white;
+    display:flex;
+}
