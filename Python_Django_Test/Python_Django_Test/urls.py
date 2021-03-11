@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from Script_02.musics.views import Do_Defender,create_test1
+from Script_02.musics.views import Do_Defend,defendhome
 from Script_02.aggression.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+# url(網址,該網址一進入要執行的事情)
 urlpatterns = [
-             url(r'^$',attackhome), # htmlcreate.html網址
-             url(r'^hello_django/', Do_Defender),  # hello_django.html網址
-             url(r'^attackpage/',attackhome) # attackpage網址
+             url(r'^$',defendhome), # 首頁
+             url(r'^defendend/', Do_Defend),  # defendend.html網址
+             url(r'^attackpage/',attackhome), # attackpage網址
+             url(r'^attackend/',Do_Attack) # attackend網址
         ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

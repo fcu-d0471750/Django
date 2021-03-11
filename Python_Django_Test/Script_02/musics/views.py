@@ -1,71 +1,38 @@
 from django.shortcuts import render
 import os,shutil
 
-def index1(request):
-    # 取得textarea數量
-    # textarea數量，最少為1
-    textarea_count = 1
+def random_create():
     for i in range(1,10):
-        name = 'code'+str(i)
-        if request.GET.get(name) is not None:
-            print(name)
-            textarea_count = textarea_count + 1
-        else :
-            print('break: ' , i)
-            break
+        file = 'Script_02/musics/code_folder/mutana'+str(i)+'.txt'
+        f = open(file, 'w+')
+        f.write(str("class calculator:\n" +
+            "   def plus(a, b):\n" +
+            "     return a * b\n" +
+            "\n" +
+            "   def minus(a, b):\n" +
+            "     return a / b"))
+        f.seek(0)
+        f.close()
 
-    # 獲取程式碼
-    ans = {}
-    first_code = request.GET.get('code')
-    each_code = []
-    each_code.append(first_code)
-    ans['head'] = first_code
-    for i in range(1,textarea_count):
-        name = 'code' + str(i)
-        temp = request.GET.get(name)
-        each_code.append(temp)
-        temp = []
 
-    for i in range(0, textarea_count):
-        ans['head'] = ans['head'] + each_code[i]
-
-    python_unittest_load.multiremanetxt(each_code)  # 編譯成.py
-    '''
-    # 獲取程式碼
-    first_code = request.GET.get('code')
-    each_code = []
-    each_code.append(first_code)
-    count11 = request.GET.get('code1')
-    each_code.append(count11)
-    count11 = request.GET.get('code2')
-    each_code.append(count11)
-
-    # 設定回傳值
-    ans = {}
-    ans['head'] = first_code + "code1: " + each_code[0] + "code2: " + each_code[1];
-
-    python_unittest_load.multiremanetxt(each_code)# 編譯成.py
-    '''
-    return render(request, 'hello_django.html', ans)
-
-def create_test1(request):
+def defendhome(request):
+    random_create()
     if(os.path.isfile('Script_02/musics/test_case_folder/user_case.py') == True):
        os.remove('Script_02/musics/test_case_folder/user_case.py')
 
-    for i in range(1, 10):
+    for i in range(1, 100):
         filename = 'Script_02/musics/code_folder/mutant' + str(i) + '.py'
         if (os.path.isfile(filename) == True):
             os.remove(filename)
 
-    for i in range(1,10):
-        #filename = 'Script_02/musics/code_collect_folder/mutant' + str(i) + '/user_case' + str(i) + '.py'
+    for i in range(1,100):
         filename = 'Script_02/musics/code_collect_folder/mutant' + str(i)
         if (os.path.isdir(filename) == True):
             shutil.rmtree(filename)
 
-    return render(request, 'htmlcreate_test.html')
+    return render(request, 'defendpage.html')
 
-def Do_Defender(request):
+def Do_Defend(request):
     # 取得使用者的Test Case-------------------------------------------------------------------------------------------------------------------
     user_test_case = request.GET.get('code')
     file = 'Script_02/musics/test_case_folder/user_case.txt'
@@ -81,7 +48,7 @@ def Do_Defender(request):
     # 取得Mutant-------------------------------------------------------------------------------------------------------------------
     # textarea數量，最少為1
     textarea_count = 0
-    for i in range(1, 10):
+    for i in range(1, 100):
         name = 'mutant' + str(i)
         if request.GET.get(name) is not None:
             print(name)
@@ -117,8 +84,6 @@ def Do_Defender(request):
 
     #新增組別:Test Case、Mutant-------------------------------------------------------------------------------------------------------------------
     for i in range(1, textarea_count + 1):
-        # 放入資料夾(Test Case)
-        #shutil.copy('Script_02/musics/test_case_folder/user_case.py','Script_02/musics/code_collect_folder/' + filename + str(i))
         Test_file = open('Script_02/musics/test_case_folder/user_case.py','r')
         new_Test_file = open('Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+'.txt', 'w+')
         new_Test_file.write("from mutant"+str(i)+" import calculator"+"\n" + Test_file.read())
@@ -135,4 +100,4 @@ def Do_Defender(request):
         print('-------------------------------')
         file = 'Script_02/musics/code_collect_folder/mutant'+str(i)+'/user_case'+str(i)+ '.py'
         os.system('python ' + file)
-    return render(request, 'hello_django.html')
+    return render(request, 'defendend.html')

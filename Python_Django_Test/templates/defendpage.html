@@ -28,30 +28,18 @@
     <script src="{% static 'General/General_JS/General.js' %}"></script>
 </head>
 
-
 <body>
-<form action="attackend/" method="get">
+
+
+<form action="defendend/" method="get">
     <div id="Area_of_FunctionBar" class="FunctionBar">
         <input name="subject" type="submit" value="Submit">
-        <input type="button" value="Add" onclick='Add_Editor()'>
     </div>
     <!--總元素-->
     <div id="mim" class="Flex_Wrap">
         <!---->
-        <div id="Area_of_Editor" class="Flex_Left_Attack">
-    <textarea id="code-python-1" name="code1">
-class calculator:
-   def plus(a, b):
-     return a + b
-
-   def minus(a, b):
-     return a - b
-    </textarea>
-        </div>
-
-        <!---->
-        <div id="Area_of_CT" class="Flex_Right_Attack">
-            <textarea id="CT_1" name="testcase1">
+        <div id="Area_of_Editor" class="Flex_Left">
+    <textarea id="code-python-1" name="code">
 import unittest
 
 class CalculatorTestCase(unittest.TestCase):
@@ -73,6 +61,48 @@ class CalculatorTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
+
+
+    </textarea>
+        </div>
+
+        <!---->
+        <div id="Area_of_CT" class="Flex_Right">
+            <textarea  id="CT_1" name="mutant1">
+class calculator:
+   def plus(a, b):
+     return a * b
+
+   def minus(a, b):
+     return a / b
+    </textarea>
+
+
+                <textarea  id="CT_2" name="mutant2">
+class calculator:
+   def plus(a, b):
+     return a & b
+
+   def minus(a, b):
+     return a % b
+    </textarea>
+
+                <textarea  id="CT_3" name="mutant3">
+class calculator:
+   def plus(a, b):
+     return a + b
+
+   def minus(a, b):
+     return a - b
+    </textarea>
+
+<textarea  id="CT_4" name="mutant4">
+class calculator:
+   def plus(a, b):
+     return a + b
+
+   def minus(a, b):
+     return a - b
     </textarea>
 
 
@@ -83,11 +113,12 @@ if __name__ == '__main__':
 
 <script id="script">
     //第一個Editor
-    Initial_Editor_Attacker(document.getElementById("code-python-1"));
+    Initial_Editor(document.getElementById("code-python-1"));
     //Area_of_CT
-    Initial_CT_Attacker(calculation_CT());
+    Initial_CT(calculation_CT());
+
+    //
+    //Add_Random_CT(5);
 </script>
 
-
 </body>
-</html>
