@@ -2,8 +2,6 @@ from django.shortcuts import render
 import os,shutil
 
 
-
-
 def attackhome(request):
     if(os.path.isfile('Script_02/aggression/test_case_folder/user_case.py') == True):
        os.remove('Script_02/aggression/test_case_folder/user_case.py')

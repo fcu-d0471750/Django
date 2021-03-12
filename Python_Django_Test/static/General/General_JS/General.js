@@ -34,22 +34,18 @@ function Add_CT() {
 }
 
 //==================================
-//副程式 : 隨機新增textarea(Test Case、Mutant)
+//副程式 : 顯示textarea(Test Case、Mutant)
 //==================================
-function Add_Random_CT(input) {
+function show_CT(amount,context) {
     let i;
-    for(i=1; i<=input; i++) {
+    document.getElementById("Mutant_Amount").innerText = "Mutant Amount: " + String(rand_mutant.length);
+    for(i=1; i<=amount; i++) {
         //暫存新的Editor
         let newmyCodeMirror;
         //新增TEXTAREA
         let btn = document.createElement("TEXTAREA");
         //預設內容
-        let btn_text = document.createTextNode("class calculator:\n" +
-            "   def plus(a, b):\n" +
-            "     return a * b\n" +
-            "\n" +
-            "   def minus(a, b):\n" +
-            "     return a / b");
+        let btn_text = document.createTextNode(context[i-1]);
         // 現在CT數量
         let check_count = calculation_CT();
 

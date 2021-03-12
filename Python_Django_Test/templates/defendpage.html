@@ -62,48 +62,48 @@ class CalculatorTestCase(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main(verbosity=2)
 
-
     </textarea>
         </div>
 
         <!---->
         <div id="Area_of_CT" class="Flex_Right">
-            <textarea  id="CT_1" name="mutant1">
-class calculator:
-   def plus(a, b):
-     return a * b
-
-   def minus(a, b):
-     return a / b
-    </textarea>
-
-
-                <textarea  id="CT_2" name="mutant2">
-class calculator:
-   def plus(a, b):
-     return a & b
-
-   def minus(a, b):
-     return a % b
-    </textarea>
-
-                <textarea  id="CT_3" name="mutant3">
-class calculator:
-   def plus(a, b):
-     return a + b
-
-   def minus(a, b):
-     return a - b
-    </textarea>
-
-<textarea  id="CT_4" name="mutant4">
-class calculator:
-   def plus(a, b):
-     return a + b
-
-   def minus(a, b):
-     return a - b
-    </textarea>
+            <p id="Mutant_Amount">Mutant Amount: None</p>
+{#            <textarea  id="CT_1" name="mutant1">#}
+{#class calculator:#}
+{#   def plus(a, b):#}
+{#     return a * b#}
+{##}
+{#   def minus(a, b):#}
+{#     return a / b#}
+{#    </textarea>#}
+{##}
+{##}
+{#                <textarea  id="CT_2" name="mutant2">#}
+{#class calculator:#}
+{#   def plus(a, b):#}
+{#     return a & b#}
+{##}
+{#   def minus(a, b):#}
+{#     return a % b#}
+{#    </textarea>#}
+{##}
+{#                <textarea  id="CT_3" name="mutant3">#}
+{#class calculator:#}
+{#   def plus(a, b):#}
+{#     return a + b#}
+{##}
+{#   def minus(a, b):#}
+{#     return a - b#}
+{#    </textarea>#}
+{##}
+{#<textarea  id="CT_4" name="mutant4">#}
+{#class calculator:#}
+{#   def plus(a, b):#}
+{#     return a + b#}
+{##}
+{#   def minus(a, b):#}
+{#     return a - b#}
+{#    </textarea>#}
 
 
         </div>
@@ -116,9 +116,10 @@ class calculator:
     Initial_Editor(document.getElementById("code-python-1"));
     //Area_of_CT
     Initial_CT(calculation_CT());
-
-    //
-    //Add_Random_CT(5);
+    //隨機生成Mutant
+    var rand_mutant = {{ mutant_context|safe }};
+    //console.log(opp.length);
+    show_CT(2,rand_mutant);
 </script>
 
 </body>
